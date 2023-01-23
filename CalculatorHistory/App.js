@@ -1,19 +1,24 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
 export default function App() {
 
 const [firstInput, setFirstInput] = React.useState('');
 const [secondInput, setSecondInput] = React.useState('');
 const [result, setResult] = React.useState(0);
+const [history, setHistory] = React.useState([]);
 
 const addButton = () => {
-  setResult(parseInt(firstInput) + parseInt(secondInput))
+  const sum = parseInt(firstInput) + parseInt(secondInput);
+  setResult(sum);
+  setHistory([...history,{key:sum , value: `${firstInput} + ${secondInput} = ${sum}` }])
 };
 
 const subtractButton = () => {
-  setResult(parseInt(firstInput) - parseInt(secondInput))
+  const subtraction = parseInt(firstInput) - parseInt(secondInput);
+  setResult(subtraction);
+  setHistory([...history,{key:subtraction , value: `${firstInput} - ${secondInput} = ${subtraction}` }])
 };
 
   return (
@@ -39,8 +44,16 @@ const subtractButton = () => {
 
         <View style={styles.buttonContainer}>
         <Button onPress={addButton} title ="+" />
-        <Button onPress={subtractButton} title ="-" />
-        </View>
+        <Button onPress={subtractButton} title ="-" />    
+    </View>
+
+      <View style={styles.historyContainer}>
+          <FlatList 
+              data={history}
+              renderItem={({ item }) => 
+              <Text>{item.value}</Text>}
+            />
+      </View>
         <StatusBar style="auto" />
   </View>
   );
@@ -52,29 +65,37 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    
+    flexDirection: 'column' // Add this line
   },
 
   inputContainer: {
-    flexDirection: 'column',
+    flex: 1, // Add this line
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 500,
+    flexDirection: 'column' // Add this line
   },
 
   buttonContainer: {
-    flexDirection: 'row',
+     // Add this line
     alignItems: 'center',
     justifyContent: 'space-around',
-    
+    flexDirection: 'row' // Add this line
   },
 
+  historyContainer: {
+    flex: 2, // Add this line
+    width: '100%',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  
   inputStyle:{
-  width: 200,
-  borderColor: "blue",
-  borderWidth: 1,
-  marginBottom: 5,
-  padding: 5
-}
-
+    width: 200,
+    borderColor: "blue",
+    borderWidth: 1,
+    marginBottom: 5,
+    padding: 5
+  },
 });
+ 
