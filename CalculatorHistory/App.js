@@ -65,25 +65,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column' // Add this line
+    flexDirection: 'column' 
   },
 
   inputContainer: {
-    flex: 1, // Add this line
+    flex: 1, 
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column' // Add this line
+    flexDirection: 'column' 
   },
 
   buttonContainer: {
-     // Add this line
     alignItems: 'center',
     justifyContent: 'space-around',
-    flexDirection: 'row' // Add this line
+    flexDirection: 'row' 
   },
 
   historyContainer: {
-    flex: 2, // Add this line
+    flex: 2, 
     width: '100%',
     padding: 10,
     justifyContent: 'center',
