@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Calculator-with-page",
-    "slug": "Calculator-with-page",
+    "name": "calculator-with-page",
+    "slug": "calculator-with-page",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
