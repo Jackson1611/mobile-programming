@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 10,
+    marginRight: 70
   },
   thumbnail: {
     width: 80,
