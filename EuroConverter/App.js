@@ -27,6 +27,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultText}>
+          EURO CONVERTER
+        </Text>
+      </View>
+
       <View style={styles.resultContainer}>
         <Text style={styles.resultText}>
           {result.toFixed(2)} {selectedCurrency}
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#F1F1F1',
-    marginTop: 50,
+    marginTop: 30,
   },
   resultText: {
     fontSize: 20,
