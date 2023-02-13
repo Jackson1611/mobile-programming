@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text,  Button, TextInput, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 export default function App()  {
-
   const [location, setLocation] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: 0.0, lng: 0.0 });
+
+  useEffect(() => {  
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {      
+        Alert.alert('No permission to get location')
+        return;    
+      }
+      let location = await Location.getCurrentPositionAsync({});    
+      setCoordinates({
+        lat: location.coords.latitude,
+        lng: location.coords.longitude
+      });
+      })();}, []);
 
   const handleSearch = async () => {
     const response = await fetch(
@@ -63,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F1F1F1',
     marginTop: 30,
-    display: 'none'
+    
   },
   resultText: {
     fontSize: 20,
