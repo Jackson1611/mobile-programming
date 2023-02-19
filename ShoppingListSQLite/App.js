@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, TextInput, View, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import * as SQLite from 'expo-sqlite';
+import { Header, ListItem, Icon, Input } from '@rneui/themed';
 
 const db = SQLite.openDatabase('shoppinglistdb.db');
 
@@ -43,22 +44,16 @@ export default function App() {
     )    
   }
 
-  const listSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: "80%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "10%"
-        }}
-      />
-    );
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Shopping List</Text>
+     <Header
+        centerComponent={{
+          text: 'Shopping List',
+          style: { color: '#fff', fontWeight: 'bold', fontSize: 18 },
+        }}
+        containerStyle={{ backgroundColor: '#2196F3', marginBottom: 10 }}
+      />
       
       <View style={styles.inputContainer}>
         <TextInput placeholder='Product' style={styles.textInput}
@@ -71,7 +66,11 @@ export default function App() {
         />      
         <TouchableOpacity onPress={saveItem}>
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Add</Text>
+            <Icon
+              name="add"
+              color="#fff"
+              containerStyle={styles.iconContainer}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -79,15 +78,21 @@ export default function App() {
       <FlatList 
         style={styles.list}
         keyExtractor={item => item.id.toString()} 
+        data={shoppingList} 
         renderItem={({item}) => (
           <TouchableOpacity style={styles.itemContainer}>
             <Text style={styles.itemText}>{item.product}</Text>
             <Text style={styles.itemText}>{item.amount}</Text>
-            <Text style={styles.itemText} onPress={() => deleteItem(item.id)}>Bought</Text>
+            <Icon
+              name="delete"
+              color="red"
+              containerStyle={styles.iconContainer}
+              onPress={() => deleteItem(item.id)}
+              size="25px"
+            />
           </TouchableOpacity>
         )} 
-        data={shoppingList} 
-        ItemSeparatorComponent={listSeparator} 
+        
       />      
     </View>
   );
